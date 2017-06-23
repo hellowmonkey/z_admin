@@ -1,0 +1,68 @@
+body, html, .container{
+	height: 100%;
+}
+body{
+	overflow: hidden;
+}
+.z-nav{
+	margin-bottom: 0;
+}
+.nav-fixed{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 200px;
+	height: 100%;
+}
+.nav-fixed{
+	background-color: #2f4050;
+	color: #d2dae6;
+}
+.nav-fixed a{
+	color: #d2dae6;
+}
+.nav-fixed .z-active > a{
+	color: #fff;
+}
+.nav-logo{
+	margin-bottom: 10px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+.nav-logo>a{
+	color: #fff;
+	display: block;
+	font-size: 22px;
+}
+.nav-box{
+	position: relative;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.container{
+	margin-left: 200px;
+	-webkit-transition: margin linear .25s;
+	-o-transition: margin linear .25s;
+	transition: margin linear .25s;
+	position: relative;
+}
+.z-tab{
+	margin: -1px 0 0 0;
+}
+.z-tab-title{
+	background-color: #fff;
+	border-color: #2f4050;
+	border-bottom-width: 3px;
+}
+.z-tab-title .z-active:after{
+	content: none
+}
+.z-tab-title .z-active{
+	background-color: #2f4050;
+	color: #fff;
+}
+.z-tab-content{
+	padding: 0;
+}

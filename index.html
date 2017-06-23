@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>z-admin</title>
+	<link rel="stylesheet" type="text/css" href="public/css/z.css">
+	<link rel="stylesheet" type="text/css" href="public/css/admin.css">
+</head>
+<body>
+	<div class="z-nav z-nav-tree nav-fixed">
+		<div class="nav-box">
+			<div class="nav-logo">
+				<a href="#aa">logo</a>
+			</div>
+			<ul id="admin-nav-list">
+				<li class="z-nav-item"><a href="#bb">导航菜单 <span class="z-icon z-pull-right">&#xe6be;</span></a></li>
+				<li class="z-nav-item z-action-tree z-active"><a href="javascript:;">导航菜单</a>
+				<ul class="z-nav-child">
+				<li class="z-nav-item"><a href="#ccc">子菜单</a></li>
+				<li class="z-nav-item"><a href="#qqq">子菜单</a></li>
+				<li class="z-nav-item"><a href="#333">子菜单</a></li>
+				</ul>
+				</li>
+				<li class="z-nav-item z-action-tree"><a href="javascript:;">导航菜单</a>
+				<ul class="z-nav-child">
+				<li class="z-nav-item"><a href="#222">子菜单</a></li>
+				<li class="z-nav-item"><a href="#111">子菜单</a></li>
+				<li class="z-nav-item"><a href="#3/2">子菜单</a></li>
+				</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<div class="z-nav">
+			<ul class="z-nav-ul">
+				<li class="z-nav-item"><a href="">导航菜单</a></li>
+				<li class="z-nav-item"><a href="">导航菜单</a></li>
+				<li class="z-nav-item z-dropdown z-action-dropdown"><a href="">导航菜单 <span class="z-caret"></span></a>
+					<ul class="z-dropdown-menu">
+						<li><a href="#">列表</a></li>
+						<li><a href="#">列表</a></li>
+						<li><a href="#">列表</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="z-tab">
+			<ul class="z-tab-title">
+				<li>类别1</li>
+				<li>类别2</li>
+				<li>类别3</li>
+			</ul>
+			<div class="z-tab-content">
+				<div class="z-tab-item">
+				<iframe src="http://www.baidu.com" width="100%" height="100%" frameborder="0"></iframe>
+				</div>
+				<div class="z-tab-item">内容2</div>
+				<div class="z-tab-item">内容3</div>
+			</div>
+		</div>			
+	</div>
+	
+	<script src="public/libs/jquery.js"></script>
+	<script src="public/js/z.js"></script>
+	<script src="public/js/admin.js"></script>
+</body>
+</html>
