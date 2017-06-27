@@ -1,8 +1,16 @@
 body, html, .container{
 	height: 100%;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 }
 body{
 	overflow: hidden;
+}
+.z-tipsbox{
+	white-space: nowrap;
 }
 .z-nav{
 	margin-bottom: 0;
@@ -43,26 +51,110 @@ body{
 
 .container{
 	margin-left: 200px;
-	-webkit-transition: margin linear .25s;
-	-o-transition: margin linear .25s;
-	transition: margin linear .25s;
 	position: relative;
 }
-.z-tab{
-	margin: -1px 0 0 0;
+.container .z-nav-item.z-active{
+	border-top: 3px solid;
 }
-.z-tab-title{
+.container .z-nav-item.z-active > a{
+	padding-top: 12px;
+}
+.container .z-tab{
+	margin: -1px 0 0 0;
+	float: left;
+	width: 100%;
+	position: relative;
+}
+.container .z-tab .prevBtn,.container .z-tab .nextBtn{
+	position: absolute;
+	top: 0;
+	font-size: 22px;
+	text-align: center;
+	width: 40px;
+	line-height: 37px;
+	z-index: 1;
+	border-bottom: 3px solid #2f4050;
+}
+.container .z-tab .prevBtn{
+	left: 0;
+}
+.container .z-tab .nextBtn{
+	right: 0;
+}
+.container .z-tab-title{
 	background-color: #fff;
 	border-color: #2f4050;
 	border-bottom-width: 3px;
 }
-.z-tab-title .z-active:after{
+.container .z-tab-title .z-active:after{
 	content: none
 }
-.z-tab-title .z-active{
+.container .z-tab-title .z-active{
 	background-color: #2f4050;
 	color: #fff;
 }
-.z-tab-content{
+.container .z-tab-content{
 	padding: 0;
+}
+.container .z-tab-item{
+	height: 100%;
+}
+
+.menuBtn{
+	font-size: 26px;
+}
+.menuBtn.z-active{
+	color: red;
+	font-weight: bold;
+}
+.face{
+	width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    float: left;
+    margin: -5px 5px 0 0;
+}
+
+.divider-content-summary {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 100%;
+    width: 5px;
+    display: table;
+    cursor: col-resize;
+    color: #000;
+    z-index: 20;
+}
+.divider-content-summary__icon {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.divider-content-summary .z-icon{
+	text-shadow: -1px 0px 0px #555;
+}
+
+.tab-tag{
+	margin: 0 40px;
+	overflow: hidden;
+}
+
+.loadingBox{
+	position: fixed;
+	z-index: 90;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	background-color: rgba(255,255,255,.97);
+}
+.loadingBox .z-icon{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left: -40px;
+	font-size: 50px;
 }

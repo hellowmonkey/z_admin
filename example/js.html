@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>z-admin</title>
+	<link rel="stylesheet" type="text/css" href="../public/css/z.css">
+</head>
+<body>
+	<div class="z-content-full">
+				<fieldset class="z-elem-field">
+			<legend>js组件</legend>
+			<div class="z-field-box">
+				<div class="z-quote z-quote-red" id="include">动态加载js、css</div>
+				<div class="z-box z-mb10">在js组件调用的时候，你不必特意先去加载libs里的js，因为在调用的时候z会自动判断加载所需要的库。paths默认的使用路径是和z.js所在的目录，如果您不想写全路径，可以通过配置<code>z.root_path="string"</code>来全局配置默认路径</div>
+				<pre class="z-action-code">
+/**
+* @param  {[str | arr]}   paths 文件路径
+* @param  {fn} cb    成功后的回调
+*/
+					$.loadJs(paths, cb)
+					$.loadCss(paths, cb)
+				</pre>
+				<div class="z-quote z-quote-red" id="resetform">重置radio和checkbox</div>
+				<div class="z-box z-mb10">动态生成的radio和checkbox需要重置一下才行</div>
+				<pre class="z-action-code">
+/**
+* 替换radio、checkbox样式
+* @param  {str} box 要操作的元素集合
+*/
+					$.resetForm(ele)
+				</pre>
+				<div class="z-quote z-quote-red" id="alert">弹框</div>
+				<div class="z-box z-mb10">弹框是modal和move的整合的拓展</div>
+				<button class="z-btn z-btn-blue" onclick="$.alert('弹框','标题（可选）')">alert</button>
+				<button class="z-btn z-btn-green" onclick="$.confirm('我帅吗？',['不帅','帅'], function(){$.msg('就喜欢你的诚实')})">confirm</button>
+				<button class="z-btn z-btn-red" onclick="$.prompt('输入弹框', function(v){$.msg(v)})">prompt</button>
+				<button class="z-btn z-btn-yellow" onclick="$.open('自定义弹框', ['哈哈', '呵呵', '嘿嘿'], function(i, obj){$.msg('第'+i+'个按钮。通过return来处理是否关闭弹框，默认关闭');return i<1})">open</button>
+				<pre class="z-action-code">
+/**
+* @param  {str} content 内容
+* @param  {str} title 标题
+* @param  {str} btn 按钮文字
+*/
+					$.alert(content, title, btn)
+/**
+* @param  {str} content 内容
+* @param  {str} title 标题
+* @param  {arr} btns 按钮
+* @param  {fn} btns 点击确认的回调
+*/
+					$.confirm(content, title, btns, cb)
+/**
+* @param  {str} title 标题
+* @param  {str} holder placeholder文字
+* @param  {arr} btns 按钮
+* @param  {fn} btns 点击确认的回调
+*/
+					$.prompt(title, holder, btns, cb)
+/**
+* @param  {str} content 内容
+* @param  {str} title 标题
+* @param  {arr} btns 按钮
+* @param  {str} width 宽度
+* @param  {arr} offset 位置(top,left)
+* @param  {fn} btns 点击按钮的回调
+*/
+					$.open(content, title, btns, width, offset, cb)
+				</pre>
+				<button class="z-btn z-btn-blue" onclick="$.toast('提示')">toast</button>
+				<button class="z-btn z-btn-red" onclick="$.success('成功信息的提示', function(){$.msg('我是成功信息提示的回调，通常会是链接跳转')})">success</button>
+				<button class="z-btn z-btn-dark" onclick="$.msg('我是提示')">msg</button>
+				<pre class="z-action-code">
+					$.toast(content, color)
+					$.success(content, cb)
+					$.msg(content)
+				</pre>
+				<div class="z-quote z-quote-red" id="progressBar">加载进度条</div>
+				<button class="z-btn z-btn-primary" onclick="$.progressBar();$.msg('模拟加载进度条，4s后模拟加载完成');setTimeout(function(){$.progressBar()},4000)">模拟加载进度条</button>
+				<pre class="z-action-code">
+					$.progressBar()
+				</pre>
+				<div class="z-quote z-quote-red" id="tagname">标签名称</div>
+				<button class="z-btn z-btn-primary" onclick="$.msg($(this).tagName(),'标签名称')">获取标签名称</button>
+				<pre class="z-action-code">
+					$(ele).tagName()
+				</pre>
+				<div class="z-quote z-quote-red" id="zdata">获取属性</div>
+				<button class="z-btn z-btn-red" zdata-title="我是zdata的title" onclick="$.msg($(this).zdata('title'))">获取属性</button>
+				<pre class="z-action-code">
+					$(ele).zdata(name, value)
+					// value 可选
+				</pre>
+				<div class="z-quote z-quote-red" id="button">按钮loading</div>
+				<div class="z-box z-mb10">loading的提示文字默认是'loading'，可以通过配置<code>zdata-loading-text="string"</code>来设置提示文字。</div>
+				<button class="z-btn z-btn-dark" zdata-loading-text="我是loading的提示文字" onclick="var _this=$(this);_this.button();setTimeout(function(){_this.button()},3000)">按钮loading</button>
+				<pre class="z-action-code">
+					$(ele).button(type)
+					// type string 可选 'loading' | 'reset'
+				</pre>
+				<div class="z-quote z-quote-red" id="datepicker">日期选择</div>
+				<div class="z-box z-mb10">两种调用方式：1、在input上添加class<code>z-action-datepicker</code>。2、通过js配置<code>$(ele).datepicker(opts)</code></div>
+				<input type="text" placeholder="点击选择日期" class="z-input z-action-datepicker">
+				<pre class="z-action-code" zdata-encode="true">
+					<input type="text" placeholder="点击选择日期" class="z-input z-action-datepicker">
+					$(ele).datepicker({
+						minView: "day",
+				        format : "yyyy-mm-dd",
+				        autoclose: true
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="waterfall">瀑布流</div>
+				<pre class="z-action-code">
+					$(ele).waterfall({
+						itemSelector: '.z-waterfall-item',
+		                gutter: 0,
+		                isAnimated: true
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="modal">模态框</div>
+				<button class="z-btn z-btn-yellow" onclick="$('#testModal').modal()">js打开模态框</button>
+				<div class="z-modal z-modal-lg" id="testModal">
+					<div class="z-modal-header">
+						<span class="z-modal-title">js打开的模态框</span>
+						<button class="z-close z-action-close" zdata-remove="false">&times;</button>
+					</div>
+					<div class="z-modal-body">
+						哈哈哈
+					</div>
+					<div class="z-modal-footer">
+						<button class="z-btn z-action-close" zdata-remove="false">关闭</button>
+						<button class="z-btn z-btn-blue">确认</button>
+					</div>
+				</div>
+				<pre class="z-action-code">
+					$(ele).modal(type)
+					// type string 可选 'show' | 'hide'
+				</pre>
+				<div class="z-quote z-quote-red" id="sendForm">ajax提交表单</div>
+				<pre class="z-action-code">
+					$.submit(ele, cb)
+					// ele 可以是要提交的form
+					// cb 完成的回调
+				</pre>
+				<div class="z-quote z-quote-red" id="tips">提示</div>
+				<div class="z-box z-mb10">两种调用方式：1、元素上添加<code>z-action-tips</code>2、手动指定要触发的元素。要显示的内容就是元素的title属性。所以<code>title</code>必须有。鼠标移到下边的按钮看看效果吧。ps：移动端没有效果</div>
+				<button class="z-btn z-action-tips" title="提示呗">提示</button>
+				<pre class="z-action-code">
+					$(ele).tips()
+				</pre>
+				<div class="z-quote z-quote-red" id="move">移动组件</div>
+				<div class="z-box z-mb10">在弹框组件中已经使用了移动组件。也可以手动调用它</div>
+				<pre class="z-action-code">
+					$(ele).move({
+						box: '.z-move',
+						top: 0,
+						right: 0,
+						bottom: 0,
+						left: 0
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="slider">幻灯</div>
+				<pre class="z-action-code">
+					$(ele).slider({
+						speed: 500,              
+						delay: 3000,             
+						complete: function() {}, 
+						keys: true,              
+						dots: true,              
+						fluid: false ,
+						prev: '.z-slider-prev',
+						next: '.z-slider-next',
+						items: '>ul',
+						item: '>li'
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="gotop">返回顶部</div>
+				<div class="z-box z-mb10"><code>z-action-gotop</code>或手动指定</div>
+				<pre class="z-action-code">
+					$(ele).goTop()
+				</pre>
+				<div class="z-quote z-quote-red" id="code">代码修饰器</div>
+				<pre class="z-action-code">
+					$(ele).code()
+				</pre>
+				<div class="z-quote z-quote-red" id="aniBox">动态进入</div>
+				<div class="z-box z-mb10">
+					细心的你应该能发现在前面的浏览中有几个区域是动态从下向上进入的，那就是因为它们被添加了class<code>z-action-anibox</code>。动态进入也可以通过<code>$.fn.aniBox()</code>来调用。
+				</div>
+				<pre class="z-action-code z-action-anibox">
+					$(ele).aniBox({
+						aniName: 'z-anim-upbit',
+						aniTime: 500
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="mobileNav">移动端导航</div>
+				<div class="z-box z-mb10">
+					如果您自定义的导航想要在移动端拥有z提供的展现形式。可以在导航上添加<code>z-action-mobilenav</code>，也可以用过下边的调用方式来配置。
+				</div>
+				<pre class="z-action-code">
+					$(ele).mobileNav({
+						item: '.z-nav-item',
+						logo: 'z-logo',
+						navCls: 'z-nav-blue',
+						menuCls: '',
+						child: '.z-dropdown-menu',
+						toggle: true
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="numberbox">数字输入框</div>
+				<div class="z-clearfix">
+					<div class="z-col-lg-2 z-col-sm-5">
+						<div class="z-input-group z-action-numberbox">
+							<div class="z-input-group-btn"><button class="z-btn z-sub">-</button></div>
+							<input type="text" class="z-input">
+							<div class="z-input-group-btn"><button class="z-btn z-add">+</button></div>
+						</div>
+					</div>
+				</div>
+				<pre class="z-action-code" zdata-encode="true">
+					<div class="z-input-group z-action-numberbox">
+						<div class="z-input-group-btn"><button class="z-btn z-sub">-</button></div>
+						<input type="text" class="z-input">
+						<div class="z-input-group-btn"><button class="z-btn z-add">+</button></div>
+					</div>
+				</pre>
+				<pre class="z-action-code">
+					$(ele).numberBox({
+						prev: '.z-btn.z-sub',
+						next: '.z-btn.z-add',
+						input: 'input',
+						min: 1,
+						max: null,
+						step: 1
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="flow">滚动加载</div>
+				<div class="z-box z-mb10">此组件的功能是在滚动到底部时自动触发加载内容。</div>
+				<pre class="z-action-code">
+					var flow = $.flow('#content', function(page, box){
+						setTimeout(function(){
+							var over = page >= 3
+							box.append('<p>加载第'+page+'页</p>')
+							flow.done(over)
+							if(over){
+								$.msg('模拟加载完成，2秒后模拟刷新（重置加载）')
+								setTimeout(function(){
+									flow.refresh()
+								}, 2000)
+							}
+						}, 1000)
+					})
+				</pre>
+				<div class="z-quote z-quote-red" id="lazyimg">图片懒加载</div>
+				<img src="" class="z-action-lazyimg z-action-album" zdata-group="10" zdata-src="../public/images/1.jpg" height="100" alt=""">
+				<img src="" class="z-action-lazyimg z-action-album" zdata-group="10" zdata-src="../public/images/2.jpg" height="100" alt=""">
+				<img src="" class="z-action-lazyimg z-action-album" zdata-group="10" zdata-src="../public/images/3.jpg" height="100" alt=""">
+				<div class="z-box z-mb10">快速调用方法：在<code>img</code>标签上添加class<code>z-action-lazyimg</code>，<code>src</code>指定占位图片或不写。通过<code>zdata-src="string"</code>来指定需要动态加载的图片地址。当然也可以只用js配置。</div>
+				<pre class="z-action-code">
+					$(img).lazyimg(scrollElem, cb)
+/**
+* 图片懒加载
+* @param  {str}   scrollEle 滚动元素
+* @param  {fn} cb        加载完成回调
+*/
+				</pre>
+				<div class="z-quote z-quote-red" id="loadImg">图片加载判断</div>
+				<pre class="z-action-code">
+					$.loadImg(imgurl, complete, error)
+				</pre>
+				<div class="z-quote z-quote-red" id="date">日期格式化</div>
+				<div class="z-box z-mb10">快速获取指定格式的指定时间的日期。如：<code>$.date()</code>什么参数都不传时会获取到以<code>'yyyy/MM/dd H:mm'</code>为格式的当前时间的日期。即为：<span id="date1"><script>$('#date1').html($.date())</script></span</div>
+				</div>
+				<pre class="z-action-code">
+					$.date(format, time)
+					/** format的格式：
+						"y" => 年份
+						"M" => 月份
+						"d" => 月份中的天数 
+						"H" => 小时24H制            
+						"h" => 小时12H制
+						"m" => 分钟
+						"s" => 秒
+						"ms" => 毫秒
+						"a" => AM/PM 标记 
+						"w" => 星期 数字格式
+						"W" => 星期 中文格式
+						"q" => 一月中的第几周
+						"z" => 时区
+					time的格式： ["string", "number", "date"]
+					**/
+				</pre>
+			<div class="z-quote z-quote-red" id="dropdown">导航伸缩</div>
+			<div class="z-box z-mb10">通过<code>z-action-dropdown</code>快速添加导航伸缩功能，默认是通过点击触发，也可以通过<code>$.fn.dropdown('hover')</code>来手动指定鼠标悬停触发。适用于下拉菜单导航和垂直导航。前边的导航都是通过默认方式调用的。</div>
+			<pre class="z-action-code">
+				$(ele).dropdown(type)
+				type: 'click' || 'hover'
+			</pre>
+			<div class="z-quote z-quote-red" id="album">相册</div>
+			<div class="z-box z-mb10">通过<code>z-action-album</code>快速调用，通过指定<code>zdata-bigsrc="string"</code>来指定显示的大图地址，不设定会使用图片的src。通过指定<code>zdata-group="number"</code>来指定分组。通过<code>zdata-index="number"</code>来指定显示顺序。通过设置<code>title</code>或<code>zdata-title</code>属性指定图片说明。</div>
+			<img src="../public/images/1.jpg" zdata-index="2" width="100" zdata-group="1" class="z-action-album" title="图片说明">
+			<img src="../public/images/2.jpg" zdata-index="1" width="100" zdata-group="1" class="z-action-album" title="图片说明">
+			<img src="../public/images/3.jpg" zdata-index="3" width="100" zdata-group="1" class="z-action-album" title="图片说明">
+			<pre class="z-action-code" zdata-encode="true">
+				<img src="../public/images/1.jpg" width="100" class="z-action-album">
+				$(ele).album()
+			</pre>
+			<div class="z-quote z-quote-red" id="hovercard">悬浮卡片</div>
+			<div class="z-box z-mb10">通过<code>z-action-hovercard</code>快速调用。通过<code>zdata-html="string"</code>或<code>zdata-url="string"</code>来指定获取内容的方式。<code>zdata-html</code> 直接填充指定的html，<code>zdata-url</code> 指定获取的地址，通过ajax获取填充内容</div>
+			<div class="z-quote z-quote-red" id="viewModel">简易数据驱动(mvvm)</div>
+			<div class="z-box z-mb10">听说最近mvvm很火，用数据做驱动，省去dom的选择操作。<br>我这里的简易版通过<code>z-</code>作为绑定前缀，可以绑定动作，也可以绑定属性。通过<code>$.viewModel(opts)</code>获取vm实例。通过<code>vm._set(key, val, doPut)</code>魔术方法来改变数据，从而改变对应的属性。</div>
+			<div id="vmTest">
+				<input type="text" class="z-input" placeholder="最简单的todolist" z-keyup="listFn" z-focus="toggle" z-blur="toggle">
+				<div class="z-box" z-html="list" z-visible="vis"></div>
+			</div>
+			<script>
+				var vm = $.viewModel({
+					$ele: '#vmTest',
+					vis: false,
+					listFn: function(){
+						vm._set('list', this.value)
+					},
+					toggle: function(){
+						vm._set('vis', !vm.vis)
+					}
+				})
+			</script>
+			<pre class="z-action-code" zdata-encode="true"><div id="vmTest">
+				<input type="text" class="z-input" placeholder="最简单的todolist" z-keyup="listFn" z-focus="toggle" z-blur="toggle">
+				<div class="z-box" z-html="list" z-visible="vis"></div>
+			</div>
+				var vm = $.viewModel({
+					$ele: '#vmTest',
+					vis: false,
+					listFn: function(){
+						vm._set('list', this.value)
+					},
+					toggle: function(){
+						vm._set('vis', !vm.vis)
+					}
+				})
+			</pre>
+		</fieldset>
+	</div>
+
+	<script src="../public/libs/jquery.js"></script>
+	<script src="../public/js/z.js"></script></body>
+</html>
